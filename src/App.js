@@ -1,24 +1,56 @@
-import React, { useState,useEffect } from 'react';
-import logo from './logo.svg';
+import React, { useState, useEffect } from 'react';
 import './App.css';
+import { NavLink } from 'react-router-dom';
 
 function App() {
 
-    const [visible, setVisible] = useState(true);
+    const [activeClass, setActiveClass] = useState('');
     const [navClass, setNavClass] = useState('');
+    const [activeLink, setActiveLink] = useState(0);
+    const [links, setLinks] = useState([
+        {
+            id: 1,
+            name: "services",
+            to: "#services",
+            className: "nav-link js-scroll-trigger"
+        },
+        {
+            id: 2,
+            name: "portfolio",
+            to: "#portfolio",
+            className: "nav-link js-scroll-trigger"
+        },
+        {
+            id: 3,
+            name: "about",
+            to: "#about",
+            className: "nav-link js-scroll-trigger"
+        },
+        {
+            id: 4,
+            name: "contact",
+            to: "#contact",
+            className: "nav-link js-scroll-trigger"
+        }]);
 
     useEffect(() => {
         window.addEventListener('scroll', handleScroll);
-      });
-      const handleScroll = () => {
-          console.log("handleScroll")
+    });
+    const handleScroll = () => {
+        console.log("handleScroll")
         let offsetTop = window.pageYOffset;
-        if ( offsetTop > 100 ){
-          setNavClass('navbar-shrink');
-        }else{
-          setNavClass('');
+        if (offsetTop > 100) {
+            setNavClass('navbar-shrink');
+        } else {
+            setNavClass('');
         }
-      };
+    };
+    const handleActive = (id) => {
+        // id.preventDefault();
+        setActiveLink(id);
+        console.log(id)
+        console.log("activeLink:" + activeLink)
+    }
     // var navbarCollapse = function () {
     //     if ($("#mainNav").offset().top > 100) {
     //         $("#mainNav").addClass("navbar-shrink");
@@ -36,16 +68,18 @@ function App() {
                         Menu
                     <i className="fas fa-bars ml-1"></i>
                     </button>
-                   
-                            <div className="collapse navbar-collapse" id="navbarResponsive">
-                                <ul className="navbar-nav text-uppercase ml-auto">
-                                    <li className="nav-item"><a className="nav-link js-scroll-trigger" onClick={()=>setVisible(false)} href="#services">Services</a></li>
-                                    <li className="nav-item"><a className="nav-link js-scroll-trigger" onClick={()=>setVisible(false)} href="#portfolio">Portfolio</a></li>
-                                    <li className="nav-item"><a className="nav-link js-scroll-trigger" onClick={()=>setVisible(false)} href="#about">About</a></li>
-                                    <li className="nav-item"><a className="nav-link js-scroll-trigger" onClick={()=>setVisible(false)} href="#team">Team</a></li>
-                                    <li className="nav-item"><a className="nav-link js-scroll-trigger" onClick={()=>setVisible(false)} href="#contact">Contact</a></li>
-                                </ul>
-                            </div>
+
+                    <div className="collapse navbar-collapse" id="navbarResponsive">
+                        <ul className="navbar-nav text-uppercase ml-auto">
+                            {
+                                links.map(link => {
+                                    return (
+                                        <li key={link.id} className="nav-item"><a className={link.className + (link.id === activeLink ? " active" : "")} onClick={()=>handleActive(link.id)} href={link.to}>{link.name}</a></li>
+                                    )
+                                })
+                            }
+                        </ul>
+                    </div>
                 </div>
             </nav>
             {/* <!-- Masthead--> */}
