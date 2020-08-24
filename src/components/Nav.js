@@ -3,41 +3,13 @@ import React, { useState, useEffect } from 'react';
 const Nav = (links) => {
     const [navClass, setNavClass] = useState('');
     const [activeLink, setActiveLink] = useState(0);
-    console.log(links)
     const handleActive = (id) => {
         setActiveLink(id);
     }
-    // const [links, setLinks] = useState([
-    //     {
-    //         id: 1,
-    //         name: "services",
-    //         to: "#services",
-    //         className: "nav-link js-scroll-trigger"
-    //     },
-    //     {
-    //         id: 2,
-    //         name: "portfolio",
-    //         to: "#portfolio",
-    //         className: "nav-link js-scroll-trigger"
-    //     },
-    //     {
-    //         id: 3,
-    //         name: "about",
-    //         to: "#about",
-    //         className: "nav-link js-scroll-trigger"
-    //     },
-    //     {
-    //         id: 4,
-    //         name: "contact",
-    //         to: "#contact",
-    //         className: "nav-link js-scroll-trigger"
-    //     }]);
-
     useEffect(() => {
         window.addEventListener('scroll', handleScroll);
     });
     const handleScroll = () => {
-        console.log("handleScroll")
         let offsetTop = window.pageYOffset;
         if (offsetTop > 100) {
             setNavClass('navbar-shrink');
