@@ -19,7 +19,7 @@ const Team = () => {
         <section className="page-section bg-light" id="team">
             {teams.map(team => {
                 return (
-                    <div className="container">
+                    <div key={team.title} className="container">
                         <div className="text-center">
                             <h2 className="section-heading text-uppercase">{team.title}</h2>
                             <h3 className="section-subheading text-muted">{team.subTitle}</h3>
@@ -27,7 +27,7 @@ const Team = () => {
                         <div className="row">
                             {team.members.map(member => {
                                 return (
-                                    <div className="col-lg-4">
+                                    <div key={member.name} className="col-lg-4">
                                         <div className="team-member">
                                             <img className="mx-auto rounded-circle" src={member.image} alt="" />
                                             <h4>{member.name}</h4>

@@ -18,7 +18,7 @@ const Portfolio = () => {
             <section className="page-section bg-light" id="portfolio">
                 {portfolios.map(portfolio => {
                     return (
-                        <div className="container">
+                        <div key={portfolio.title} className="container">
                             <div className="text-center">
                     <h2 className="section-heading text-uppercase">{portfolio.title}</h2>
                     <h3 className="section-subheading text-muted">{portfolio.subtitle}</h3>
@@ -27,7 +27,7 @@ const Portfolio = () => {
                                 {portfolio.projects.map(project => {
                                     return (
 
-                                        <div key={portfolio.id} className="col-lg-4 col-sm-6 mb-4">
+                                        <div key={project.modalId} className="col-lg-4 col-sm-6 mb-4">
                                             <div className="portfolio-item">
                                                 <a className="portfolio-link" data-toggle="modal" href={"#" + project.modalId}>
                                                     <div className="portfolio-hover">
